@@ -1,5 +1,4 @@
 "use client";
-import { apiUrl } from "@/config";
 import { useUser } from "@/contexts/UserContext";
 import axios from "axios";
 import Link from "next/link";
@@ -18,8 +17,10 @@ const Login = () => {
     event.preventDefault();
     setLoginErrors({});
     try {
-      
-      const response = await axios.post(`${apiUrl}/session`, {email,password});
+      const response = await axios.post(`/api/session`, {
+        email,
+        password,
+      });
       const data = await response.data;
 
       const user = {
@@ -30,7 +31,7 @@ const Login = () => {
       router.push("/store/user/mi-cuenta");
     } catch (error) {
       console.log(error);
-      setLoginErrors({password: 'Error de autenticación'});
+      setLoginErrors({ password: "Error de autenticación" });
     }
 
     setEmail("");
@@ -89,7 +90,9 @@ const Login = () => {
                     </div>
                   </div>
                   <div className="flex justify-end">
-                    <Link href="#">Olvidó su contraseña?</Link>
+                    <Link href="/store/user/login/passwordReset">
+                      Olvidó su contraseña?
+                    </Link>
                   </div>
                 </div>
                 <div className="flex flex-col">
