@@ -13,7 +13,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body
         suppressHydrationWarning={true}
-        className={`${roboto.className} antialiased bg-[#FFFFFF] h-full`}
+        className={`${roboto.className} antialiased bg-[#bbbbbb] h-full`}
       >
         <UserProvider>
           <CartProvider>
