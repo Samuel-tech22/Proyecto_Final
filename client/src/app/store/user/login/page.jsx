@@ -98,7 +98,7 @@ const Login = () => {
                 </div>
                 <div className="flex flex-col">
                   <button
-                    className="bg-zinc-900 text-white h-10 text-xl"
+                    className="bg-black text-white h-10 text-xl"
                     type="submit"
                   >
                     Iniciar Sesión
