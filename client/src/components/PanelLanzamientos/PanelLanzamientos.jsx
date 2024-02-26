@@ -6,7 +6,7 @@ import { apiUrl } from "@/config";
 export default function PanelLanzamientos(){
 
    const [products, setProducts] = useState([]);
-
+    const [init, setInit] = useState(0);
    const getLanzamientos = async ()=>{
     try {
         const response = await axios.get(`${apiUrl}/products/lanzamientos`);
@@ -19,7 +19,11 @@ export default function PanelLanzamientos(){
    }
    
    useEffect(()=>{
-    getLanzamientos();
+    if(init === 0){
+        getLanzamientos();
+
+    }
+    setInit(1);
    });
 
     return(

@@ -12,6 +12,8 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 
 
+
+
 export default function StorePage() {
   const {marca} = useParams();
   const router = useRouter();
@@ -23,6 +25,18 @@ export default function StorePage() {
 
   return (
     <div>
+       <div className="bg-[#62ee46] text-white py-2 text-xl overflow-hidden">
+                <span className=" flex justify-evenly animate-pulse">
+                    <span>Hacé tu pedido rápido y fácil</span>
+                    <span>Hacé tu pedido rápido y fácil</span>
+                    <span>Hacé tu pedido rápido y fácil</span>
+                    <span>Hacé tu pedido rápido y fácil</span>
+                    <span>Hacé tu pedido rápido y fácil</span>
+                </span>
+        </div>
+      <div className="pb-8">
+        <ImageSlider/>
+      </div>
       <div className=" flex justify-center">
         <h1 className="text-xl font-bold">Categorias</h1>
       </div>
@@ -54,7 +68,9 @@ export default function StorePage() {
             </li>
         </ul>
       </div>
+
       <PanelLanzamientos/>
+
       <div className="flex justify-evenly text-lg py-5 ">
         <div className="flex gap-4">
           <div className="items-center flex">
