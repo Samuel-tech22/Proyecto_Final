@@ -15,7 +15,7 @@ const MiCuenta = () => {
   const deleteUser = async () => {
     try {
       const response = await axios.delete(
-        `${apiUrl}/user/65cda8ba80893be73f85499b`
+        `${apiUrl}/user/${user._id}`
       );
       const result = response.data;
       console.log(result);

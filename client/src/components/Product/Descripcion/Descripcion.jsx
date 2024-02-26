@@ -203,5 +203,3 @@ const Descripcion = ({ initialProduct }) => {
 
 export default Descripcion;
 
-
-
