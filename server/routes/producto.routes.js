@@ -16,7 +16,6 @@ router.get("/marcas/:marca", ProductController.findByMarca);
 //Find All category
 router.get("/category/:id", ProductController.findProductByCategory);
 // //Delete One
-// router.delete("/:id", PirateController.deletePirate);
 
 
 module.exports = router;

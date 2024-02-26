@@ -37,4 +37,8 @@ app.use("/api/products", productRoutes);
 const categoryRoutes = require('./routes/category.routes');
 app.use("/api/categories", categoryRoutes);
 
+const ventasRoutes = require('./routes/ventas.routes');
+app.use("/api/ventas", ventasRoutes);
+
+
 app.listen(port, () => console.log(`Listening on port: ${port}`));
