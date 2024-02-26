@@ -12,7 +12,7 @@ const crearVenta = async (req, res) => {
 
 const obtenerVenta = async (req, res) => {
     try {
-        const venta = await Venta.findById(req.params.id).populate('productos');
+        const venta = await Venta.findById(req.params.id).populate('detailProduct.product');
         if (!venta) {
             return res.status(404).json({ mensaje: 'Venta no encontrada' });
         }
@@ -25,7 +25,7 @@ const obtenerVenta = async (req, res) => {
 
 const obtenertodaslasVentas = async (req, res) => {
     try {
-        const ventas = await Venta.find().populate('productos');
+        const ventas = await Venta.find().populate('detailProduct.product');
         res.status(200).json(ventas);
     } catch (error) {
         console.error(error);
@@ -37,11 +37,11 @@ const obtenertodaslasVentas = async (req, res) => {
 const obtenerVentaPorCliente = async (req, res) => {
     try {
         const clienteId = req.params.clienteId;
-        const venta = await Venta.findOne({ cliente: clienteId }).populate('productos');
-        if (!venta) {
-            return res.status(404).json({ mensaje: 'Venta no encontrada para este cliente' });
+        const ventas = await Venta.find({ clientId: clienteId }).populate('detailProduct.product');
+        if (!ventas) {
+            return res.status(404).json({ mensaje: 'Ventas no encontradas para este cliente' });
         }
-        res.json(venta);
+        res.json(ventas);
     } catch (error) {
         console.error(error);
         res.status(500).json({ mensaje: 'Error del servidor' });

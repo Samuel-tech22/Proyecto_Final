@@ -12,6 +12,37 @@ const VentaSchema = new mongoose.Schema(
             type: String,
             required: [true, "client is required"],
         },
+        name: {
+            type: String,
+            required: [true, "name is required"],
+        },
+        city: {
+            type: String,
+            required: [true, "city is required"],
+        },
+        address: {
+            type: String,
+            required: [true, "address is required"],
+        },
+        email: {
+            type: String,
+            required: [true, "email is required"],
+        },
+        cel: {
+            type: String,
+            required: [true, "cel is required"],
+        },
+        envio: {
+            type: Number,
+            required: true,
+            default: 0
+        },
+        entrega: {
+            type: String,
+            required: true,
+            enum: ['retiro', 'domicilio'],
+            default: 'domicilio'
+        },
         estado:
         {
             type: String,
