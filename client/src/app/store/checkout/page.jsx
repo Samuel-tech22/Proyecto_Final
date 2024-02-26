@@ -43,7 +43,6 @@ const CheckoutPage = () => {
     setName(user?.nombreCompleto || "");
     setEmail(user?.email || "");
     setCel(user?.telefono || "");
-    console.log(user);
   }, [user]);
 
   const confirmarPedido = () => {
