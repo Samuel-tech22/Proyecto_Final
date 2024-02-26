@@ -22,13 +22,14 @@ export default function ProductCard({ product }) {
     }
 
   return (
-    <div className="w-52 mx-2 inline-block cursor-pointer" onClick={() => {loadProduct(product._id)}}>
+    <div className="w-52 mx-2 inline-block cursor-pointer border-2 border-grey" onClick={() => {loadProduct(product._id)}}>
       <div className="block h-[200px] overflow-hidden">
         <img 
           src={`${imagesURL}/products/${product._id}/principal.jpg`}
           alt={`Imagen de ${product.title}`}
         />
       </div>
+      <hr />
       <div className="p-3">
       <p>{product.title}</p>
       <span className="font-bold">{format(product.price)}</span>

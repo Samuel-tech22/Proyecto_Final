@@ -29,8 +29,9 @@ export default function PanelLanzamientos(){
 
     return(
         <div className="w-screen ">
-            <h1 className="text-center text-xl font-bold">Lanzamientos</h1>
-            <div className="w-full w-max-screen whitespace-nowrap overflow-hidden overflow-x-scroll scroll-smooth focus:scroll-auto">
+            <h1 className="text-center text-xl font-bold pb-3">Lanzamientos</h1>
+            
+            <div className="w-full whitespace-nowrap overflow-hidden overflow-x-scroll scroll-smooth focus:scroll-auto">
                 {
                     products.map((product, index) => {
                         return (
