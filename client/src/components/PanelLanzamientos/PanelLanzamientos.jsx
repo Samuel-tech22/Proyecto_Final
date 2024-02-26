@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import ProductCard from "../ProductCard/ProductCard";
 import axios from "axios";
 import { apiUrl } from "@/config";
+import ImageSlider from "../ImageSlider/ImageSlider";
 
 export default function PanelLanzamientos(){
 

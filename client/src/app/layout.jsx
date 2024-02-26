@@ -17,9 +17,9 @@ export default function RootLayout({ children }) {
       >
         <UserProvider>
           <CartProvider>
-            <TopHeader></TopHeader>
+            <TopHeader />
             {children}
-            <Footer> </Footer>
+            <Footer />
           </CartProvider>
         </UserProvider>
       </body>
