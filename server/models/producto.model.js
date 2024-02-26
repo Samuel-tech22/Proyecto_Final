@@ -46,5 +46,4 @@ const Product = new mongoose.model("Product", ProductSchema);
 
 module.exports = Product;
 
-        // prod
-        // <img src={`localhost:8000/images/products/prod.id/principal.png`} ></img>
+
