@@ -1,134 +1,147 @@
+
+
 "use client";
-import React, { useState } from "react";
+import ImageSlider from "@/components/ImageSlider/ImageSlider";
+import PanelLanzamientos from "@/components/PanelLanzamientos/PanelLanzamientos";
+import { apiUrl, imagesURL, store } from "@/config";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faLock,
+  faRotateRight,
+  faTruck,
+} from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
+import PanelDesplazamiento from "@/components/PanelDesplazamiento/PanelDesplazamiento";
+import CardMarca from "@/components/CardMarca/CardMarca";
+import { useEffect, useState } from "react";
 import axios from "axios";
-import { apiUrl } from "@/config";
-import FormUser from "@/components/FormUser/FormUser";
 
-const RegisterUser = () => {
+export default function StorePage() {
+  const { marca } = useParams();
   const router = useRouter();
-  const [nombre, setNombre] = useState("");
-  const [email, setEmail] = useState("");
-  const [telefono, setTelefono] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const [loginErrors, setLoginErrors] = useState({});
-  const [passwordConfirmed, setPasswordConfirmed] = useState(true);
-  const [emailError, setEmailError] = useState("");
-  const [passwordError, setPasswordError] = useState("");
-
-  const validateEmail = (value) => {
-    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-    return emailRegex.test(value);
-  };
-
-  const validatePassword = (value) => {
-    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()-=_+{};:'",.<>/?[\]`|~]).{8,}$/;
-    return passwordRegex.test(value);
-  };
-
-  const handleEmailChange = (e) => {
-    const inputValue = e.target.value;
-    setEmail(inputValue);
-    if (!validateEmail(inputValue)) {
-      setEmailError("Por favor ingresa un correo válido");
-    } else {
-      setEmailError("");
-    }
-  };
-
-  const handlePasswordChange = (e) => {
-    const inputValue = e.target.value;
-    setPassword(inputValue);
-    if (!validatePassword(inputValue)) {
-      setPasswordError("La contraseña debe tener al menos una mayúscula, una minúscula y un número");
-    } else {
-      setPasswordError("");
-    }
-  };
-
-  const onSubmitHandler = async (event) => {
-    event.preventDefault();
-    setLoginErrors({});
-
-    if (password !== confirmPassword) {
-      setPasswordConfirmed(false);
-      return;
-    }
-
-    if (!validateEmail(email) || !validatePassword(password)) {
-      return;
-    }
-
-    const user = {
-      nombreCompleto: nombre,
-      email: email,
-      telefono: telefono,
-      password: password,
-      confirmPassword: confirmPassword,
-    };
-
-    try {
-      const response = await axios.post(`${apiUrl}/user`, user);
-      const result = response.data;
-      console.log(result);
-      router.push(`/store/user/login`);
-    } catch (error) {
-      console.log(error.response.data);
-      if (error.response && error.response.data) {
-        setLoginErrors(error.response.data.errors);
-      } else {
-        setLoginErrors({ general: "Algo salió mal ¡Intenta otra vez!" });
-      }
-    }
-  };
-
-  const inputChange = (e) => {
-    const { name, value } = e.target;
-    if (name === "nombre") {
-      setNombre(value);
-    }
-    if (name === "telefono") {
-      setTelefono(value);
-    }
-    if (name === "confirmPassword") {
-      setConfirmPassword(value);
-    }
-  };
+  const [marcas, setMarcas] = useState({});
 
   return (
     <div>
-      <div className="py-5 ps-20 bg-[#f9f4fa]">
-        <div>
-          <div>
-            <Link href="/store">Inicio</Link>
-            <Link href="/store/user/mi-cuenta">Mi cuenta</Link>
-            <Link href="/store/user/register">Registrarse</Link>
+      <div className="bg-[#62ee46] text-black py-2 text-xl overflow-hidden">
+        <span className=" flex justify-evenly animate-pulse">
+          <span>Hacé tu pedido rápido y fácil</span>
+          <span>Hacé tu pedido rápido y fácil</span>
+          <span>Hacé tu pedido rápido y fácil</span>
+          <span>Hacé tu pedido rápido y fácil</span>
+        </span>
+      </div>
+      <div className="pb-8">
+        <ImageSlider />
+      </div>
+      <div className=" flex justify-center">
+        <h1 className="text-xl font-bold">Categorias</h1>
+      </div>
+      <div className="w-full flex justify-center p-3">
+        <ul className="flex gap-10 text-lg">
+          <li className="text-center font-bold border-2 border-grey">
+            <Link href="/store/categories/65c963770675d5d5ad5f2082">
+              <img className="h-32 " src="tenis.jpg" alt="tenis" />
+              <hr />
+              Tenis
+            </Link>
+          </li>
+          <li className="text-center font-bold border-2 border-grey">
+            <Link href="/store/categories/65d1cf4a6c6ca2453aa3b56">
+              <img
+                className="h-32 "
+                src="/productos/sandalias.jpg"
+                alt="sandalia"
+              />
+              <hr />
+              Sandalias
+            </Link>
+          </li>
+          <li className="text-center font-bold border-2 border-grey">
+            <Link href="/store/categories/65d1cf6e6c6ca2453aa3b571">
+              <img className="h-32 w-32" src="/productos/bota.jpg" alt="bota" />
+              <hr />
+              Botas
+            </Link>
+          </li>
+          <li className="text-center font-bold border-2 border-grey">
+            <Link href="/store/categories/65d1cf776c6ca2453aa3b573">
+              <img
+                className="h-32 "
+                src="/productos/infantil.jpg"
+                alt="infantil"
+              />
+              <hr />
+              Infantil
+            </Link>
+          </li>
+        </ul>
+      </div>
+      <br />
+      <PanelLanzamientos />
+      <br />
+      <div className="flex justify-evenly text-lg py-5 ">
+        <div className="flex gap-4">
+          <div className="items-center flex">
+            <FontAwesomeIcon icon={faTruck} style={{ color: "#000000" }} />
           </div>
-          <div className="pt-3">
-            <h1 className="text-5xl font-bold">Crear mi cuenta</h1>
-            <FormUser
-              onSubmitHandler={onSubmitHandler}
-              isRegister={true}
-              nombre={nombre}
-              email={email}
-              telefono={telefono}
-              password={password}
-              confirmPassword={confirmPassword}
-              loginErrors={loginErrors}
-              passwordConfirmed={passwordConfirmed}
-              inputChange={inputChange}
-              emailError={emailError}
-              passwordError={passwordError}
-              handleEmailChange={handleEmailChange}
-              handlePasswordChange={handlePasswordChange}
+          <div>
+            <p className="font-bold">Entrega rápida</p>
+            <span>Realizamos envíos a todo el Paraguay</span>
+          </div>
+        </div>
+        <div className="flex gap-4">
+          <div className="items-center flex">
+            <FontAwesomeIcon icon={faLock} style={{ color: "#000000" }} />
+          </div>
+          <div>
+            <p className="font-bold">Compra segura</p>
+            <span>Sitio web 100% seguro.</span>
+          </div>
+        </div>
+        <div
+          className="cursor-pointer flex gap-4"
+          onClick={(e) => {
+            router.push(`/store/devoluciones`);
+          }}
+        >
+          <div className="items-center flex">
+            <FontAwesomeIcon
+              icon={faRotateRight}
+              style={{ color: "#000000" }}
             />
+          </div>
+          <div>
+            <p className="font-bold">Intercambios de productos</p>
+            <span>¡Haga click aquí! para cambiar producto.</span>
           </div>
         </div>
       </div>
+      <PanelDesplazamiento />
+      <div className="mt-6">
+        <div className=" flex justify-center">
+          <h1 className="text-2xl font-bold">Escoja su marca</h1>
+        </div>
+        <div className="grid grid-cols-3 gap-4 p-4">
+          <CardMarca marca={"Converse"} />
+          <CardMarca marca={"Adidas"} />
+          <CardMarca marca={"Nike"} />
+          <CardMarca marca={"Puma"} />
+          <CardMarca marca={"Moleca"} />
+          <CardMarca marca={"Beira rio"} />
+        </div>
+      </div>
+
+      <div className="flex justify-center py-8">
+        <Link href="/store/products">
+          <img
+            className="h-60 w-80 opacity-70"
+            src={`${imagesURL}/productostodos.png`}
+            alt="productos"
+          />
+        </Link>
+      </div>
     </div>
   );
-};
-
-export default RegisterUser;
+}
