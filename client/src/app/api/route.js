@@ -56,6 +56,7 @@ export function register(data) {
   });
 }
 export function passwordResetToken(params = {}) {
+  console.log(params);
   return new Promise(async (resolve, reject) => {
     try {
       const response = await axios.get(
@@ -66,6 +67,7 @@ export function passwordResetToken(params = {}) {
         }
       );
       const result = await response.data;
+      console.log(result);
       resolve(result);
     } catch (error) {
       console.log(error);
@@ -74,14 +76,12 @@ export function passwordResetToken(params = {}) {
   });
 }
 export function passwordReset(data) {
+  console.log(data);
   return new Promise(async (resolve, reject) => {
     try {
       const response = await axios.patch(
         `http://localhost:8000/api/user/passwordReset`,
-        data,
-        {
-          withCredentials: true,
-        }
+        data
       );
       const result = await response.data;
       resolve(result);
