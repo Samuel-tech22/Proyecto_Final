@@ -4,6 +4,7 @@ import { Fragment } from "react";
 const PasswordResetPage = () => {
   return (
     <Fragment>
+      <br/>
       <PasswordResetForm />
     </Fragment>
   );
