@@ -35,12 +35,9 @@ const registerUser = () => {
             console.log(result);
             router.push(`/store/user/login`);
         } catch (error) {
-          console.log(error);
-            setLoginErrors(error.response.data.errors);
+          setLoginErrors(error.response.data.errors);
         }
-      } else {
-          setPasswordConfirmed(false);
-        }
+      }
     };
     
     const inputChange = (e)=>{

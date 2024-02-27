@@ -1,12 +1,12 @@
 "use client";
 import React, { useState } from "react";
-import FormUser from "@/components/FormUser/FormUser";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import axios from "axios";
 import { apiUrl } from "@/config";
+import FormUser from "@/components/FormUser/FormUser";
 
-export default function RegisterUser() {
+const RegisterUser = () => {
   const router = useRouter();
   const [nombre, setNombre] = useState("");
   const [email, setEmail] = useState("");
@@ -14,14 +14,51 @@ export default function RegisterUser() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [loginErrors, setLoginErrors] = useState({});
-  const [passwordConfirmed, setPasswordConfirmed] = useState(true); 
+  const [passwordConfirmed, setPasswordConfirmed] = useState(true);
+  const [emailError, setEmailError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+
+  const validateEmail = (value) => {
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    return emailRegex.test(value);
+  };
+
+  const validatePassword = (value) => {
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()-=_+{};:'",.<>/?[\]`|~]).{8,}$/;
+    return passwordRegex.test(value);
+  };
+
+  const handleEmailChange = (e) => {
+    const inputValue = e.target.value;
+    setEmail(inputValue);
+    if (!validateEmail(inputValue)) {
+      setEmailError("Por favor ingresa un correo válido");
+    } else {
+      setEmailError("");
+    }
+  };
+
+  const handlePasswordChange = (e) => {
+    const inputValue = e.target.value;
+    setPassword(inputValue);
+    if (!validatePassword(inputValue)) {
+      setPasswordError("La contraseña debe tener al menos una mayúscula, una minúscula y un número");
+    } else {
+      setPasswordError("");
+    }
+  };
+
   const onSubmitHandler = async (event) => {
     event.preventDefault();
     setLoginErrors({});
 
     if (password !== confirmPassword) {
       setPasswordConfirmed(false);
-      return; 
+      return;
+    }
+
+    if (!validateEmail(email) || !validatePassword(password)) {
+      return;
     }
 
     const user = {
@@ -40,28 +77,23 @@ export default function RegisterUser() {
     } catch (error) {
       console.log(error.response.data);
       if (error.response && error.response.data) {
-        setLoginErrors(error.response.data);
+        setLoginErrors(error.response.data.errors);
       } else {
-        setLoginErrors({ general: "Something went wrong. Please try again." });
+        setLoginErrors({ general: "Algo salió mal ¡Intenta otra vez!" });
       }
     }
   };
 
   const inputChange = (e) => {
-    if (e.target.name === "nombre") {
-      setNombre(e.target.value);
+    const { name, value } = e.target;
+    if (name === "nombre") {
+      setNombre(value);
     }
-    if (e.target.name === "email") {
-      setEmail(e.target.value);
+    if (name === "telefono") {
+      setTelefono(value);
     }
-    if (e.target.name === "telefono") {
-      setTelefono(e.target.value);
-    }
-    if (e.target.name === "password") {
-      setPassword(e.target.value);
-    }
-    if (e.target.name === "confirmPassword") {
-      setConfirmPassword(e.target.value);
+    if (name === "confirmPassword") {
+      setConfirmPassword(value);
     }
   };
 
@@ -84,13 +116,19 @@ export default function RegisterUser() {
               telefono={telefono}
               password={password}
               confirmPassword={confirmPassword}
-              loginErrors= {loginErrors}
+              loginErrors={loginErrors}
+              passwordConfirmed={passwordConfirmed}
               inputChange={inputChange}
-              passwordConfirmed={passwordConfirmed} // Asegúrate de pasar passwordConfirmed a FormUser
+              emailError={emailError}
+              passwordError={passwordError}
+              handleEmailChange={handleEmailChange}
+              handlePasswordChange={handlePasswordChange}
             />
           </div>
         </div>
       </div>
     </div>
   );
-}
+};
+
+export default RegisterUser;

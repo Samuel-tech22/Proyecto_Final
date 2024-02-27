@@ -23,7 +23,7 @@ const Login = () => {
         password,
       });
       const data = await response.data;
-
+  
       const user = {
         ...data.user,
         accessToken: data.accessToken,
@@ -32,12 +32,25 @@ const Login = () => {
       router.push("/store/user/mi-cuenta");
     } catch (error) {
       console.log(error);
-      setLoginErrors({ email:"No existe", password: "Error de autenticación" });
+      if (error.response && error.response.status === 400) {
+        const responseData = error.response.data;
+        if (responseData.errors && responseData.errors.password) {
+          setLoginErrors({ password: "Contraseña incorrecta" });
+        } else {
+          setLoginErrors({ email: "Autenticación fallida" });
+        }
+      } else if (error.response && error.response.status === 404) {
+        setLoginErrors({ email: "Correo electrónico incorrecto" });
+      } else {
+        setLoginErrors({ email: "Error de conexión" });
+      }
     }
-
+  
     setEmail("");
     setPassword("");
   };
+  
+
   return (
     <div className="h-700px py-5 ps-20 bg-[#f9f4fa]">
       <div>
@@ -67,9 +80,9 @@ const Login = () => {
                       />
                       {loginErrors.email && (
                         <h1 className="border-l-2 bg-gray-300 border-l-red-700 px-2 py-1 mb-2">
-                          {loginErrors.email.message}
+                          {loginErrors.email}
                         </h1>
-                      )} 
+                      )}
                     </div>
                     <div className="flex flex-col">
                       <label>Contraseña</label>
@@ -85,14 +98,14 @@ const Login = () => {
                       />
                       {loginErrors.password && (
                         <h1 className="border-l-2 bg-gray-300 border-l-red-700 px-2 py-1 mt-2">
-                          {loginErrors.password.message}
+                          {loginErrors.password}
                         </h1>
                       )}
                     </div>
                   </div>
                   <div className="flex justify-end">
                     <Link href="/store/user/login/passwordReset">
-                      Olvidó su contraseña?
+                      ¿Olvidó su contraseña?
                     </Link>
                   </div>
                 </div>
