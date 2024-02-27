@@ -1,4 +1,5 @@
 "use client";
+import { apiUrl } from "@/config";
 import { useUser } from "@/contexts/UserContext";
 import axios from "axios";
 import Link from "next/link";
@@ -17,7 +18,7 @@ const Login = () => {
     event.preventDefault();
     setLoginErrors({});
     try {
-      const response = await axios.post(`/api/session`, {
+      const response = await axios.post(`${apiUrl}/session`, {
         email,
         password,
       });
@@ -97,7 +98,7 @@ const Login = () => {
                 </div>
                 <div className="flex flex-col">
                   <button
-                    className="bg-zinc-900 text-white h-10 text-xl"
+                    className="bg-black text-white h-10 text-xl"
                     type="submit"
                   >
                     Iniciar Sesión

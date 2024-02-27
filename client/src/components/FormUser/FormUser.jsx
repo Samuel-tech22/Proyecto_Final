@@ -1,9 +1,5 @@
 "use client";
-import { apiUrl, store } from "@/config";
-import axios from "axios";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
 
 export default function FormUser({ onSubmitHandler, isRegister, nombre, email, telefono, password, confirmPassword, loginErrors, passwordConfirmed, inputChange }) {
 
@@ -100,7 +96,7 @@ export default function FormUser({ onSubmitHandler, isRegister, nombre, email, t
           </div>
           <div className="flex flex-col">
             <button
-              className="bg-zinc-900 text-white h-10 text-xl"
+              className="bg-black text-white h-10 text-xl"
               type="submit"
             >{
               isRegister? 

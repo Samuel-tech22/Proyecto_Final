@@ -15,7 +15,7 @@ const Product = ({product}) => {
             <ImageProduct product={product} />
         </div>
         <div className="flex-1">
-            <Descripcion product={product} />
+            <Descripcion initialProduct={product} />
         </div>
     </div>
   );
