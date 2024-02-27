@@ -39,7 +39,7 @@ const Login = () => {
     setPassword("");
   };
   return (
-    <div className="py-5 ps-20  bg-[#f9f4fa]">
+    <div className="h-700px py-5 ps-20 bg-[#f9f4fa]">
       <div>
         <div>
           <Link href="/store">Inicio-</Link>

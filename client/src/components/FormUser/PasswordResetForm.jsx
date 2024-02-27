@@ -45,7 +45,7 @@ const PasswordResetForm = () => {
         console.log(updatePassword);
         setActiveStep((prevActiveStep) => prevActiveStep + 1);
         setTimeout(() => {
-          router.push("/login");
+          router.push("/store/user/login");
         }, 2000);
       } catch (error) {
         console.log(error);
