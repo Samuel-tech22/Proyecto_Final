@@ -32,7 +32,7 @@ const Login = () => {
       router.push("/store/user/mi-cuenta");
     } catch (error) {
       console.log(error);
-      setLoginErrors({ password: "Error de autenticación" });
+      setLoginErrors({ email:"No existe", password: "Error de autenticación" });
     }
 
     setEmail("");
@@ -65,11 +65,11 @@ const Login = () => {
                         placeholder="por ejemplo tucorreo@gmail.com"
                         className="bg-[#f9f4fa] border border-zinc-900 mb-4 h-8 p-3"
                       />
-                      {loginErrors?.email && (
-                        <h1 className="border-l-2 bg-gray-300 border-l-red-700 px-2 py-1 mt-2">
-                          {loginErrors.email}
+                      {loginErrors.email && (
+                        <h1 className="border-l-2 bg-gray-300 border-l-red-700 px-2 py-1 mb-2">
+                          {loginErrors.email.message}
                         </h1>
-                      )}
+                      )} 
                     </div>
                     <div className="flex flex-col">
                       <label>Contraseña</label>
@@ -83,9 +83,9 @@ const Login = () => {
                         placeholder="por ejemplo tu contraseña"
                         className="bg-[#f9f4fa]  border border-zinc-900  mb-4 h-8 p-3 "
                       />
-                      {loginErrors?.password && (
+                      {loginErrors.password && (
                         <h1 className="border-l-2 bg-gray-300 border-l-red-700 px-2 py-1 mt-2">
-                          {loginErrors.password}
+                          {loginErrors.password.message}
                         </h1>
                       )}
                     </div>

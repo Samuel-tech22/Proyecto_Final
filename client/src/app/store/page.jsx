@@ -1,144 +1,95 @@
 "use client";
-import ImageSlider from "@/components/ImageSlider/ImageSlider";
-import PanelLanzamientos from "@/components/PanelLanzamientos/PanelLanzamientos";
-import { apiUrl, imagesURL, store } from "@/config";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faLock,
-  faRotateRight,
-  faTruck,
-} from "@fortawesome/free-solid-svg-icons";
+import React, { useState } from "react";
+import FormUser from "@/components/FormUser/FormUser";
 import Link from "next/link";
-import { useParams, useRouter } from "next/navigation";
-import PanelDesplazamiento from "@/components/PanelDesplazamiento/PanelDesplazamiento";
-import CardMarca from "@/components/CardMarca/CardMarca";
-import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import axios from "axios";
+import { apiUrl } from "@/config";
 
-export default function StorePage() {
-  const { marca } = useParams();
+export default function RegisterUser() {
   const router = useRouter();
-  const [marcas, setMarcas] = useState({});
+  const [nombre, setNombre] = useState("");
+  const [email, setEmail] = useState("");
+  const [telefono, setTelefono] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [loginErrors, setLoginErrors] = useState({});
+  const [passwordConfirmed, setPasswordConfirmed] = useState(true); 
+  const onSubmitHandler = async (event) => {
+    event.preventDefault();
+    setLoginErrors({});
+
+    if (password !== confirmPassword) {
+      setPasswordConfirmed(false);
+      return; 
+    }
+
+    const user = {
+      nombreCompleto: nombre,
+      email: email,
+      telefono: telefono,
+      password: password,
+      confirmPassword: confirmPassword,
+    };
+
+    try {
+      const response = await axios.post(`${apiUrl}/user`, user);
+      const result = response.data;
+      console.log(result);
+      router.push(`/store/user/login`);
+    } catch (error) {
+      console.log(error.response.data);
+      if (error.response && error.response.data) {
+        setLoginErrors(error.response.data);
+      } else {
+        setLoginErrors({ general: "Something went wrong. Please try again." });
+      }
+    }
+  };
+
+  const inputChange = (e) => {
+    if (e.target.name === "nombre") {
+      setNombre(e.target.value);
+    }
+    if (e.target.name === "email") {
+      setEmail(e.target.value);
+    }
+    if (e.target.name === "telefono") {
+      setTelefono(e.target.value);
+    }
+    if (e.target.name === "password") {
+      setPassword(e.target.value);
+    }
+    if (e.target.name === "confirmPassword") {
+      setConfirmPassword(e.target.value);
+    }
+  };
 
   return (
     <div>
-      <div className="bg-[#62ee46] text-black py-2 text-xl overflow-hidden">
-        <span className=" flex justify-evenly animate-pulse">
-          <span>Hacé tu pedido rápido y fácil</span>
-          <span>Hacé tu pedido rápido y fácil</span>
-          <span>Hacé tu pedido rápido y fácil</span>
-          <span>Hacé tu pedido rápido y fácil</span>
-        </span>
-      </div>
-      <div className="pb-8">
-        <ImageSlider />
-      </div>
-      <div className=" flex justify-center">
-        <h1 className="text-xl font-bold">Categorias</h1>
-      </div>
-      <div className="w-full flex justify-center p-3">
-        <ul className="flex gap-10 text-lg">
-          <li className="text-center font-bold border-2 border-grey">
-            <Link href="/store/categories/65c963770675d5d5ad5f2082">
-              <img className="h-32 " src="tenis.jpg" alt="tenis" />
-              <hr />
-              Tenis
-            </Link>
-          </li>
-          <li className="text-center font-bold border-2 border-grey">
-            <Link href="/store/categories/65d1cf4a6c6ca2453aa3b56">
-              <img
-                className="h-32 "
-                src="/productos/sandalias.jpg"
-                alt="sandalia"
-              />
-              <hr />
-              Sandalias
-            </Link>
-          </li>
-          <li className="text-center font-bold border-2 border-grey">
-            <Link href="/store/categories/65d1cf6e6c6ca2453aa3b571">
-              <img className="h-32 w-32" src="/productos/bota.jpg" alt="bota" />
-              <hr />
-              Botas
-            </Link>
-          </li>
-          <li className="text-center font-bold border-2 border-grey">
-            <Link href="/store/categories/65d1cf776c6ca2453aa3b573">
-              <img
-                className="h-32 "
-                src="/productos/infantil.jpg"
-                alt="infantil"
-              />
-              <hr />
-              Infantil
-            </Link>
-          </li>
-        </ul>
-      </div>
-      <br />
-      <PanelLanzamientos />
-      <br />
-      <div className="flex justify-evenly text-lg py-5 ">
-        <div className="flex gap-4">
-          <div className="items-center flex">
-            <FontAwesomeIcon icon={faTruck} style={{ color: "#000000" }} />
-          </div>
+      <div className="py-5 ps-20 bg-[#f9f4fa]">
+        <div>
           <div>
-            <p className="font-bold">Entrega rápida</p>
-            <span>Realizamos envíos a todo el Paraguay</span>
+            <Link href="/store">Inicio</Link>
+            <Link href="/store/user/mi-cuenta">Mi cuenta</Link>
+            <Link href="/store/user/register">Registrarse</Link>
           </div>
-        </div>
-        <div className="flex gap-4">
-          <div className="items-center flex">
-            <FontAwesomeIcon icon={faLock} style={{ color: "#000000" }} />
-          </div>
-          <div>
-            <p className="font-bold">Compra segura</p>
-            <span>Sitio web 100% seguro.</span>
-          </div>
-        </div>
-        <div
-          className="cursor-pointer flex gap-4"
-          onClick={(e) => {
-            router.push(`/store/devoluciones`);
-          }}
-        >
-          <div className="items-center flex">
-            <FontAwesomeIcon
-              icon={faRotateRight}
-              style={{ color: "#000000" }}
+          <div className="pt-3">
+            <h1 className="text-5xl font-bold">Crear mi cuenta</h1>
+            <FormUser
+              onSubmitHandler={onSubmitHandler}
+              isRegister={true}
+              nombre={nombre}
+              email={email}
+              telefono={telefono}
+              password={password}
+              confirmPassword={confirmPassword}
+              loginErrors= {loginErrors}
+              inputChange={inputChange}
+              passwordConfirmed={passwordConfirmed} // Asegúrate de pasar passwordConfirmed a FormUser
             />
           </div>
-          <div>
-            <p className="font-bold">Intercambios de productos</p>
-            <span>¡Haga click aquí! para cambiar producto.</span>
-          </div>
         </div>
-      </div>
-      <PanelDesplazamiento />
-      <div className="mt-6">
-        <div className=" flex justify-center">
-          <h1 className="text-2xl font-bold">Escoja su marca</h1>
-        </div>
-        <div className="grid grid-cols-3 gap-4 p-4">
-          <CardMarca marca={"Converse"} />
-          <CardMarca marca={"Adidas"} />
-          <CardMarca marca={"Nike"} />
-          <CardMarca marca={"Puma"} />
-          <CardMarca marca={"Moleca"} />
-          <CardMarca marca={"Beira rio"} />
-        </div>
-      </div>
-
-      <div className="flex justify-center py-8">
-        <Link href="/store/products">
-          <img
-            className="h-60 w-80 opacity-70"
-            src={`${imagesURL}/productostodos.png`}
-            alt="productos"
-          />
-        </Link>
       </div>
     </div>
   );

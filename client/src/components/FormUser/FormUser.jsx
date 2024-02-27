@@ -34,11 +34,11 @@ export default function FormUser({ onSubmitHandler, isRegister, nombre, email, t
                   placeholder="por ejemplo tucorreo@gmail.com"
                   className="bg-[#f9f4fa] border border-zinc-900 mb-4 h-8 p-3"
                 />
-                {loginErrors.email ? (
+                {loginErrors.email && (
                   <h1 className="border-l-2 bg-gray-300 border-l-red-700 px-2 py-1 mb-2">
                     {loginErrors.email.message}
                   </h1>
-                ) : null}
+                )}
                 <label>Teléfono(opcional)</label>
                 <input
                   type="text"
@@ -63,35 +63,34 @@ export default function FormUser({ onSubmitHandler, isRegister, nombre, email, t
                     placeholder="por ejemplo tu contraseña"
                     className="bg-[#f9f4fa]  border border-zinc-900  mb-4 h-8 p-3 "
                   />
-                  {loginErrors.password ? (
+                  {loginErrors.password && (
                     <h1 className="border-l-2 bg-gray-300 border-l-red-700 px-2 py-1 mt-2">
-                      {loginErrors.password.message}
+                      <p>{loginErrors.password.message}</p>
                     </h1>
-                  ) : null}
+                  )}
                 </div>
               )}
-
-                    {isRegister && (
-                        <div className="flex flex-col">
-                        <label>Confirmar Contraseña</label>
-                        <input
-                          required
-                          value={confirmPassword}
-                          onChange={(e) => inputChange(e)}
-                          type="password"
-                          name="confirmPassword"
-                          id="confirmPassword"
-                          placeholder="por ejemplo tu contraseña"
-                          className="bg-[#f9f4fa]  border border-zinc-900  mb-4 h-8 p-3 "
-                        />
-                        {!passwordConfirmed && confirmPassword.length > 0 ? (
-                          <p className="border-l-2 bg-gray-300 border-l-red-700 px-2 py-1 mt-2">
-                            Las contraseñas no coinciden!
-                          </p>
-                        ) : null}
-                      </div>
+              {isRegister && (
+                <div className="flex flex-col">
+                  <label>Confirmar Contraseña</label>
+                    <input
+                      required
+                      value={confirmPassword}
+                      onChange={(e) => inputChange(e)}
+                      type="password"
+                      name="confirmPassword"
+                      id="confirmPassword"
+                      placeholder="por ejemplo tu contraseña"
+                      className="bg-[#f9f4fa]  border border-zinc-900  mb-4 h-8 p-3 "
+                    />
+                    {/* Mostrar el mensaje de error de contraseña */}
+                    {password !== confirmPassword && (
+                      <h1 className="border-l-2 bg-gray-300 border-l-red-700 px-2 py-1 mt-2">
+                        Las contraseñas no coinciden!
+                      </h1>
                     )}
-                    
+                </div>
+              )}        
             </div>
           </div>
           <div className="flex flex-col">
@@ -107,13 +106,12 @@ export default function FormUser({ onSubmitHandler, isRegister, nombre, email, t
             </button>
             {
               isRegister? 
-             (
+            (
             <span className="self-center">
               ¿Ya tienes acceso?.
               <Link href="/store/user/login"> Acceso</Link>
             </span>
-
-              )
+            )
               :
               null
             }
