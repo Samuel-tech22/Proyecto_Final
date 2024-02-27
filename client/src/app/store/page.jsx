@@ -22,9 +22,8 @@ export default function StorePage() {
 
   return (
     <div>
-      <div className="bg-[#62ee46] text-white py-2 text-xl overflow-hidden">
+      <div className="bg-[#62ee46] text-black py-2 text-xl overflow-hidden">
         <span className=" flex justify-evenly animate-pulse">
-          <span>Hacé tu pedido rápido y fácil</span>
           <span>Hacé tu pedido rápido y fácil</span>
           <span>Hacé tu pedido rápido y fácil</span>
           <span>Hacé tu pedido rápido y fácil</span>
