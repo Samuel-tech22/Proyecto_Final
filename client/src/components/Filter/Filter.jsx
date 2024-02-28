@@ -4,44 +4,39 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useState } from 'react';
 
 const Filter = () => {
+    const [search, setSearch] = useState("");
     const [marca, setMarca] = useState([]);
     const [talla, setTalla] = useState({});
     const [price, setPrice] = useState({});
-    
 
 
   return (
     <div>
-
-
         <button className='border-solid-black'>
       <FontAwesomeIcon icon={faFilter}/>
-      <span>Filtar</span>
+      <span>Filter</span>
         </button>
-        <div>
-          <h1>Filtrar</h1>
-          <label htmlFor="marca">Marca</label>
-          <select name="marca" id="marca">
-            <option value={marca}>Nike</option>
-            <option value={marca}>Moleca</option>
-            <option value={marca}>Beira Rio</option>
-            <option value={marca}>Adidas</option>
-            <option value={marca}>Puma</option>
-            <option value={marca}>Modare</option>
+        <div>          
+        <select name="" id="" >
+          <option value="">Moleca</option>
+          <option value="">Nike</option>
+          <option value="">Adidas</option>
+          <option value="">Puma</option>
+          <option value="">Converse</option>
+          <option value="">Modare</option>
+        </select>
+        <select name="" id="">
+          <option value="">34</option>
+          <option value="">35</option>
+          <option value="">36</option>
+          <option value="">37</option>
+          <option value="">38</option>
+          <option value="">39</option>
           </select>
-          <label htmlFor="talla">Talla</label>
-          <select name="talla" id="talla">
-            <option value={talla}>34</option>
-            <option value={talla}>35</option>
-            <option value={talla}>36</option>
-            <option value={talla}>37</option>
-            <option value={talla}>38</option>
-            <option value={talla}>39</option>
-          </select>
-          <label htmlFor="price">Precio</label>
-          <input type="number" placeholder="Precio mínimo" value={price} />
-          <input type="number" placeholder="Precio máximo" value={price}/>
-        </div>
+          <label htmlFor="">Price</label>
+          <input type="text" name="" id="" placeholder='Precio Mínimo'/>
+          <input type="text" name="" id="" placeholder='Precio Máximo'/>       
+         </div>
     </div>
   );
 };
