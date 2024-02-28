@@ -24,13 +24,13 @@ export default function StorePage() {
 
   return (
     <div>
-      <div className="bg-[#62ee46] text-black py-2 text-xl overflow-hidden">
-        <span className=" flex justify-evenly animate-pulse">
-          <span>Hacé tu pedido rápido y fácil</span>
-          <span>Hacé tu pedido rápido y fácil</span>
-          <span>Hacé tu pedido rápido y fácil</span>
-          <span>Hacé tu pedido rápido y fácil</span>
-        </span>
+      <div className="bg-[#041349] text-white py-1 text-sm overflow-hidden  ">
+        <p className=" gap-3 flex justify-evenly animate-pulse infinite text-anim">
+          <span className="tracking-[0.2em]">Calzados nuevos cada semana!</span>
+          <span className="tracking-[0.2em]">Envios desde a todo el país</span>
+          <span className="tracking-[0.2em]">Compra online y recibelo en la puerta de tu casa</span>
+          <span className="tracking-[0.2em]">Gran variedad de estilos</span>
+        </p>
       </div>
       <div className="pb-8">
         <ImageSlider />
