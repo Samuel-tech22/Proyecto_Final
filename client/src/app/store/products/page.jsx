@@ -4,9 +4,9 @@ export default function ProductsPage(){
 
 
     return (
-        <div className="px-28 py-7">       
+        <div className="px-28 py-7 min-h-80">       
         <div>
-        <AllFilteredProducts title= "Filtros"/>
+        <AllFilteredProducts title= "Productos"/>
             
         </div>
         </div>

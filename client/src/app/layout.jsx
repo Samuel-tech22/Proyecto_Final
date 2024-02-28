@@ -12,7 +12,7 @@ const roboto = Roboto({ subsets: ["latin"], weight: "400" });
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body suppressHydrationWarning={true} className={`${roboto.className} antialiased bg-[#bbbbbb] h-full`}>
+      <body suppressHydrationWarning={true} className={`${roboto.className} subpixel-antialiased bg-[#ffffff] h-full`}>
         <UserProvider>
           <CartProvider>
             <TopHeader />
