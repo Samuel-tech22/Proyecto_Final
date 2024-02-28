@@ -1,16 +1,16 @@
-
+import AlertAviso from "@/components/Controles/Alerts/aviso";
 import { useCart } from "@/contexts/CartContext";
 import { faRefresh, faCartPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {  useEffect, useState } from "react";
-
+import { useEffect, useState } from "react";
 
 const Descripcion = ({ initialProduct }) => {
   const [product, setProduct] = useState(initialProduct);
   const [talla, setTalla] = useState(undefined);
+  const [showAlert, setShowAlert] = useState(false);
   const [cantidad, setCantidad] = useState(1);
-  const { cart, addToCart, removeFromCart, calculateTotal } = useCart()
-  
+  const { cart, addToCart, removeFromCart, calculateTotal } = useCart();
+
   function format(num) {
     return (
       "Gs. " +
@@ -20,43 +20,45 @@ const Descripcion = ({ initialProduct }) => {
     );
   }
 
-
-
   function add() {
     if (talla) {
       // Busca el stock disponible para la talla seleccionada
-      const selectedStock = product.stocks.find(stock => stock.talla === talla);
- 
+      const selectedStock = product.stocks.find(
+        (stock) => stock.talla === talla
+      );
+
       if (selectedStock && selectedStock.stock > 0) {
         const detail = {
           _id: product._id,
           price: product.price,
-          title: product.title
+          title: product.title,
         };
- 
+
         // Resta 1 del stock del producto
-        const updatedStock = product.stocks.map(stock => {
+        const updatedStock = product.stocks.map((stock) => {
           if (stock.talla === talla) {
-            return {...stock, stock: stock.stock - 1};
+            return { ...stock, stock: stock.stock - 1 };
           }
           return stock;
         });
- 
+
         addToCart(detail, talla, Number.parseInt(cantidad));
         setCantidad(1);
         // Actualiza el estado del producto con el nuevo stock
-        setProduct(prevProduct => ({
+        setProduct((prevProduct) => ({
           ...prevProduct,
-          stocks: updatedStock
+          stocks: updatedStock,
         }));
+        setTalla(undefined);
       } else {
-        alert("Lo sentimos, no hay suficiente stock disponible para esta talla.");
+        alert(
+          "Lo sentimos, no hay suficiente stock disponible para esta talla."
+        );
       }
     } else {
-      alert("Seleccione una talla...");
+      setShowAlert(true);
     }
   }
-
 
   useEffect(() => {
     if (cantidad === 0) {
@@ -64,13 +66,24 @@ const Descripcion = ({ initialProduct }) => {
     }
   }, [cantidad]);
 
-  useEffect(()=> {
-    setProduct(initialProduct)
-  },[initialProduct])
-  
+  useEffect(() => {
+    setProduct(initialProduct);
+  }, [initialProduct]);
 
   return product._id ? (
     <div className="flex flex-col">
+      {showAlert && (
+        <AlertAviso
+          title={"Aviso"}
+          flotante={true}
+          closable={true}
+          handleClose={() => {
+            setShowAlert(false);
+          }}
+          descripcion={"Por favor, seleccione una talla."}
+        />
+      )}
+
       <div className="flex flex-col gap-4">
         <p className="text-3xl font-bold">{product.title}</p>
         <p className="text-xl font-semibold">{format(product.price)}</p>
@@ -122,12 +135,13 @@ const Descripcion = ({ initialProduct }) => {
             value={cantidad}
             onChange={(e) => {
               const newCantidad = parseInt(e.target.value);
-                if (!isNaN(newCantidad)) { // Verifica si es un número válido
-                  setCantidad(newCantidad);
-                } else {
-                  // Si el valor no es un número válido, podrías mostrar un mensaje de error o hacer alguna otra acción
-                  console.error("La cantidad ingresada no es válida");
-                }
+              if (!isNaN(newCantidad)) {
+                // Verifica si es un número válido
+                setCantidad(newCantidad);
+              } else {
+                // Si el valor no es un número válido, podrías mostrar un mensaje de error o hacer alguna otra acción
+                console.error("La cantidad ingresada no es válida");
+              }
             }}
             className="bg-gray-100 px-2 w-[70px] text-center"
           />
@@ -140,7 +154,6 @@ const Descripcion = ({ initialProduct }) => {
             +
           </button>
         </div>
-
 
         <button
           className="bg-[#333333] text-white py-2 px-4"
@@ -200,6 +213,4 @@ const Descripcion = ({ initialProduct }) => {
   );
 };
 
-
 export default Descripcion;
-

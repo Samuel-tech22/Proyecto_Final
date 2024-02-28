@@ -52,7 +52,7 @@ const Filter = ({ handleFilter }) => {
       </button>
       {showFilter && (
 
-      <div className="flex gap-2">
+      <div className="flex gap-2 z-50">
         <DefaultSelect
           defaultOption={"Todas las marcas"}
           name={"marca"}
