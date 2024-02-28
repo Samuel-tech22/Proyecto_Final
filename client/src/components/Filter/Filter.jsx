@@ -10,13 +10,31 @@ const Filter = () => {
 
   return (
     <div>
-
-
         <button className='border-solid-black'>
       <FontFaceSet icon={faFilter}/>
       <span>Filter</span>
         </button>
-        <label htmlFor=""></label>
+        <div>          
+        <select name="" id="" onChange={} value={}>
+          <option value="">Moleca</option>
+          <option value="">Nike</option>
+          <option value="">Adidas</option>
+          <option value="">Puma</option>
+          <option value="">Converse</option>
+          <option value="">Modare</option>
+        </select>
+        <select name="" id="" onChange={} value={}>
+          <option value="">34</option>
+          <option value="">35</option>
+          <option value="">36</option>
+          <option value="">37</option>
+          <option value="">38</option>
+          <option value="">39</option>
+          </select>
+          <label htmlFor="">Price</label>
+          <input type="text" name="" id="" placeholder='Precio Mínimo'/>
+          <input type="text" name="" id="" placeholder='Precio Máximo'/>       
+         </div>
     </div>
   );
 };
