@@ -70,3 +70,29 @@ try {
     res.status(500).json(error);
 }
 };
+
+// buscar producto
+module.exports.searchProduct = async (req, res) => {
+    try {
+        const { keyword } = req.params;
+        // Realiza la búsqueda en el título y la descripción utilizando expresiones regulares para una búsqueda insensible a mayúsculas y minúsculas
+        const results = await Product.find({
+            $or: [
+                { title: { $regex: keyword, $options: "i" } },
+                { description: { $regex: keyword, $options: "i" } },
+            ],
+        }).select("-photo"); // Excluye la foto del resultado
+        res.json(results);
+    } catch (error) {
+        console.error("Error en la API de búsqueda de productos:", error);
+        res.status(400).send({
+            success: false,
+            message: "Error en la API de búsqueda de productos",
+            error,
+        });
+    }
+};
+
+
+
+
