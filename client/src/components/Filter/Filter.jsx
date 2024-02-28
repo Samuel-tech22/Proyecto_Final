@@ -1,5 +1,7 @@
+"use client"
 import { faFilter } from '@fortawesome/free-solid-svg-icons';
-import React from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import React, { useState } from 'react';
 
 const Filter = () => {
     const [search, setSearch] = useState("");
@@ -11,11 +13,11 @@ const Filter = () => {
   return (
     <div>
         <button className='border-solid-black'>
-      <FontFaceSet icon={faFilter}/>
+      <FontAwesomeIcon icon={faFilter}/>
       <span>Filter</span>
         </button>
         <div>          
-        <select name="" id="" onChange={} value={}>
+        <select name="" id="" >
           <option value="">Moleca</option>
           <option value="">Nike</option>
           <option value="">Adidas</option>
@@ -23,7 +25,7 @@ const Filter = () => {
           <option value="">Converse</option>
           <option value="">Modare</option>
         </select>
-        <select name="" id="" onChange={} value={}>
+        <select name="" id="">
           <option value="">34</option>
           <option value="">35</option>
           <option value="">36</option>
