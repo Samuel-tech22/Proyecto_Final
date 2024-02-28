@@ -14,8 +14,7 @@ const TopHeader = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (searchTerm.trim() !== "") {
-      const encodedTerm = searchTerm.replace(/\s/g, '%20'); // Reemplaza los espacios en blanco con %20
-      router.push(`/store/search/${encodeURIComponent(encodedTerm)}`);
+      router.push(`/store/search/${encodeURIComponent(searchTerm)}`);
     }
   };
   

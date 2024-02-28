@@ -7,7 +7,7 @@ import ProductCard from "@/components/ProductCard/ProductCard";
 
 export default function SearchProductPage() {
     const router = useRouter();
-    const {term: keyword}  = useParams();;
+    const {term: keyword}  = useParams();
     const [searchResults, setSearchResults] = useState([]);
 
     const handleSearchProducts = async () => {
@@ -32,6 +32,7 @@ export default function SearchProductPage() {
             {searchResults.map((product) => (
             <ProductCard key={product._id} product={product} />
             ))}
+            
         </div>
         </div>
     );
