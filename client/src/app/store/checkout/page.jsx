@@ -70,6 +70,7 @@ const CheckoutPage = () => {
           cantidad: item.quantity,
           product: item._id,
           price: item.price,
+          talla: item.talla,
         };
       }),
     };

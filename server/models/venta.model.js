@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const detailProductSchema = new mongoose.Schema({
     cantidad: { type: Number, required: true },
     product: { type: mongoose.Schema.ObjectId, ref: "Product", required: true },
+    talla: { type: String, required: true },
     price: { type: Number, required: true },
 });
 

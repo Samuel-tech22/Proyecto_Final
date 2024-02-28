@@ -1,9 +1,25 @@
 const Venta = require('../models/venta.model');
+const Product = require('../models/producto.model');
 
 const crearVenta = async (req, res) => {
     try {
         const nuevaVenta = new Venta(req.body);
         const ventaGuardada = await nuevaVenta.save();
+        if(ventaGuardada){
+            await ventaGuardada.detailProduct.forEach(async (detalle) => {
+                // Obtén el producto de la base de datos
+                const product = await Product.findById(detalle.product);
+                product.stocks.map((stock) => {
+                    console.log(stock);
+                    console.log(detalle);
+                    if(stock.talla === parseInt(detalle.talla)){
+                        stock.stock -= detalle.cantidad;
+                    }
+                });
+                // Guarda el producto actualizado en la base de datos
+                await product.save();
+              });
+        }
         res.status(201).json(ventaGuardada);
     } catch (error) {
         console.error(error);
