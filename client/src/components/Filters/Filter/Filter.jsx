@@ -1,4 +1,5 @@
 "use client"
+import DefaultInput from '@/components/Controles/Input/defaultInput';
 import { faFilter } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useEffect, useState } from 'react';
@@ -39,6 +40,7 @@ const Filter = ( {handleFilter} ) => {
         </select>
           <label htmlFor="minPrice">Precio Mínimo</label>
           <input type="text" name="minPrice" id="minPrice" placeholder='Precio Mínimo' onChange={(e) => setMinPrice(e.target.value)} value={minPrice}/>
+          <DefaultInput label={"Precio Mínimo"} type={"text"} onChange={(e) => setMinPrice(e.target.value)} value={minPrice} placeholder={"Precio Mínimo"} />
           <label htmlFor="maxPrice">Precio Máximo</label>
           <input type="text" name="maxPrice" id="maxPrice" placeholder='Precio Máximo' onChange={(e) => setMaxPrice(e.target.value)} value={maxPrice}/>       
          </div>

@@ -24,6 +24,7 @@ const CheckoutPage = () => {
     calculateTotal,
     calculateTotalCount,
     removeFromCart,
+    removeAll
   } = useCart();
   const [entrega, setEntrega] = useState("domicilio");
   const [name, setName] = useState("");
@@ -55,7 +56,8 @@ const CheckoutPage = () => {
     setCel(user?.telefono || "");
   }, [user]);
 
-  const confirmarPedido = () => {
+  const confirmarPedido = (e) => {
+    e.preventDefault();
     const venta = {
       clientId: user?._id || "anonimo",
       estado: "pendiente",
@@ -84,11 +86,12 @@ const CheckoutPage = () => {
         .post(`${apiUrl}/ventas`, venta)
         .then((res) => {
           console.log(res.data);
-
+          removeAll();
           if (user) {
             router.push("/store/user/mi-cuenta");
           } else {
             alert("¡Su pedido ha sido registrado!");
+            router.push("/store");
           }
         })
         .catch((err) => {
@@ -102,13 +105,13 @@ const CheckoutPage = () => {
       <h1 className="text-2xl font-bold text-center py-8">Confirmar pedido</h1>
 
       <div className="flex justify-evenly">
-        <div className="">
-          {/* <p>
+        <form onSubmit={confirmarPedido} className="">
+          <p>
             Completa tu pedido más rápido.{" "}
             <Link className="font-bold text-red-800" href="/store/user/login">
               Iniciar sesión.
             </Link>
-          </p> */}
+          </p>
           <div className="mt-6">
             <h1 className="font-bold text-xl">Tipo de entrega</h1>
             <div className="ml-2 flex flex-col gap-4">
@@ -119,6 +122,7 @@ const CheckoutPage = () => {
                   id="domicilio"
                   checked={entrega === "domicilio"}
                   onChange={() => setEntrega("domicilio")}
+                  required
                 />
                 <label htmlFor="domicilio"> Envío a domicilio</label>
               </div>
@@ -129,6 +133,7 @@ const CheckoutPage = () => {
                   id="retiro"
                   checked={entrega === "retiro"}
                   onChange={() => setEntrega("retiro")}
+                  required
                 />
                 <label htmlFor="retiro"> Retiro en puerta</label>
               </div>
@@ -146,6 +151,7 @@ const CheckoutPage = () => {
                   className="bg-gray-300 p-1 border-2 border-gray-400"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
+                  required
                 />
               </div>
               <div className="flex flex-col">
@@ -157,6 +163,7 @@ const CheckoutPage = () => {
                   className="bg-gray-300 p-1 border-2 border-gray-400"
                   value={city}
                   onChange={(e) => setCity(e.target.value)}
+                  required
                 />
               </div>
               <div className="flex flex-col">
@@ -168,6 +175,7 @@ const CheckoutPage = () => {
                   className="bg-gray-300 p-1 border-2 border-gray-400"
                   value={address}
                   onChange={(e) => setAddress(e.target.value)}
+                  required
                 />
               </div>
               <div className="flex flex-col">
@@ -179,6 +187,7 @@ const CheckoutPage = () => {
                   className="bg-gray-300 p-1 border-2 border-gray-400"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
+                  required
                 />
               </div>
               <div className="flex flex-col">
@@ -190,11 +199,12 @@ const CheckoutPage = () => {
                   className="bg-gray-300 p-1 border-2 border-gray-400"
                   value={cel}
                   onChange={(e) => setCel(e.target.value)}
+                  required
                 />
               </div>
               <div className="flex flex-col">
                 <button
-                  onClick={confirmarPedido}
+                  type="submit"
                   className="p-2 w-full bg-[#666666] font-bold text-white flex items-center justify-between px-8"
                 >
                   Confirmar pedido
@@ -203,7 +213,7 @@ const CheckoutPage = () => {
               </div>
             </div>
           </div>
-        </div>
+        </form>
         <div className=" pt-12">
           <div className="grid grid-cols-2 gap-2">
             {cart.map((item, index) => {
@@ -250,7 +260,7 @@ const CheckoutPage = () => {
               <span>{format(calculateTotal())}</span>
             </div>
             <div className="flex justify-between">
-              <span>Envío</span>
+              <span>Con envío</span>
               <span>{format(calculateTotal() + 25000)}</span>
             </div>
             <div className="flex justify-between font-bold ">

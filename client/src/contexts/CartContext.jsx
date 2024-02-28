@@ -49,6 +49,9 @@ export const CartProvider = ({ children }) => {
   const removeFromCart = (productId, talla) => {
     setCart(cart.filter((item) => item._id !== productId || item.talla !== talla));
   };
+  const removeAll = (productId, talla) => {
+    setCart([]);
+  };
 
   const calculateTotal = () => {
     return cart.reduce((total, item) => total + item.price * item.quantity, 0);
@@ -66,6 +69,7 @@ export const CartProvider = ({ children }) => {
         removeFromCart,
         calculateTotal,
         calculateTotalCount,
+        removeAll
       }}
     >
       {children}
