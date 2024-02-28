@@ -17,5 +17,7 @@ router.get("/marcas/:marca", ProductController.findByMarca);
 router.get("/category/:id", ProductController.findProductByCategory);
 // //Delete One
 
+//search product
+router.get("/search/:keyword", ProductController.searchProduct);
 
 module.exports = router;
