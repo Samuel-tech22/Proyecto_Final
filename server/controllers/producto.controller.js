@@ -80,6 +80,7 @@ module.exports.searchProduct = async (req, res) => {
             $or: [
                 { title: { $regex: keyword, $options: "i" } },
                 { description: { $regex: keyword, $options: "i" } },
+                { marca: { $regex: keyword, $options: "i" } },
             ],
         }).select("-photo"); // Excluye la foto del resultado
         res.json(results);

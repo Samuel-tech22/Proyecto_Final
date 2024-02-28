@@ -1,18 +1,18 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { useRouter } from "next/router";
+import { useParams, useRouter } from "next/navigation";
 import axios from "axios";
 import { apiUrl } from "@/config";
 import ProductCard from "@/components/ProductCard/ProductCard";
 
 export default function SearchProductPage() {
     const router = useRouter();
-    const { keyword } = router.query;
+    const {term: keyword}  = useParams();;
     const [searchResults, setSearchResults] = useState([]);
 
     const handleSearchProducts = async () => {
         try {
-        const response = await axios.get(`${apiUrl}/search/${keyword}`);
+        const response = await axios.get(`${apiUrl}/products/search/${keyword}`);
         const results = await response.data;
         setSearchResults(results);
         } catch (error) {
