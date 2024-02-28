@@ -1,15 +1,12 @@
-import AllProducts from "@/components/AllProducts/AllProducts";
-import Filter from "@/components/Filter/Filter";
+import AllFilteredProducts from "@/components/Filters/AllFilteredProducts/AllFilteredProducts";
 
 export default function ProductsPage(){
 
 
     return (
-        <div className="px-28 py-7">
-
-        <Filter/>
+        <div className="px-28 py-7">       
         <div>
-            <AllProducts title= "Productos"></AllProducts>
+        <AllFilteredProducts title= "Filtros"/>
             
         </div>
         </div>
