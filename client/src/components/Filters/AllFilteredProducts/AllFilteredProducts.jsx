@@ -4,13 +4,13 @@ import { useEffect, useState } from "react";
 import ProductCard from "../../ProductCard/ProductCard";
 import { apiUrl } from "@/config";
 import Filter from "@/components/Filters/Filter/Filter";
+import AlertNone from "@/components/Controles/Alerts/none";
 
 const AllFilteredProducts = ({ title }) => {
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
 
   const getAllProducts = async () => {
-    console.log("Buscando productos..");
     try {
       const response = await axios.get(`${apiUrl}/products`);
       const result = await response.data;
@@ -41,16 +41,23 @@ const AllFilteredProducts = ({ title }) => {
     setFilteredProducts(filtrados);
   };
 
-  return (
+  return filteredProducts.length > 0 ?(
     <div className="flex flex-col">
-      {/* //cada vez que en filter se haga un cambio handler filter le voy a pasar a mi filter */}
       <Filter handleFilter={handleFilter} />
-      <p className="p-3 text-4xl py-5 font-bold tracking-wider">{title}</p>
+      <span className="p-3 text-5xl py-5 font-bold tracking-wider">{title}</span>
       <div className="w-full  justify-start">
         {filteredProducts.map((product, index) => {
           return <ProductCard key={index} product={product} />;
         })}
       </div>
+    </div>
+  )
+  : (
+    <div>
+      <AlertNone
+      title={"Lo siento!"}
+      descripcion={"No hay productos disponibles en este momento"}
+      />
     </div>
   );
 };

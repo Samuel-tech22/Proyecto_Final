@@ -3,6 +3,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import ProductCard from "../ProductCard/ProductCard";
 import { apiUrl } from "@/config";
+import AlertNone from "../Controles/Alerts/none";
 
 const AllProducts = ({ title }) => {
   const [products, setProducts] = useState([]);
@@ -21,7 +22,7 @@ const AllProducts = ({ title }) => {
     getAllProducts();
   });
 
-  return (
+  return products? (
     <div>
       <p className="p-3 text-4xl py-5 font-bold tracking-wider">{title}</p>
       <div className="w-full  justify-start">
@@ -29,6 +30,14 @@ const AllProducts = ({ title }) => {
           return <ProductCard key={index} product={product} />;
         })}
       </div>
+    </div>
+  )
+  : (
+    <div>
+      <AlertNone
+      title={"Lo siento"}
+      descripcion={"No hay productos disponibles en este momento"}
+      />
     </div>
   );
 };
