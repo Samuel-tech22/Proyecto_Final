@@ -29,7 +29,10 @@ const Login = () => {
         accessToken: data.accessToken,
       };
       login(data.user);
+      
       router.push("/store/user/mi-cuenta");
+      
+
     } catch (error) {
       console.log(error);
       if (error.response && error.response.status === 400) {

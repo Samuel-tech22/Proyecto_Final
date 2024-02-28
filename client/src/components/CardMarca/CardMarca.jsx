@@ -14,7 +14,7 @@ const CardMarca = ({marca}) => {
     return(
         <div >
             <div onClick={() => MarcaPage()}>
-            <img  className="border-2 border-black rounded-md opacity-70"
+            <img  className="border-2 border-black rounded-md "
                     src={`${imagesURL}/marcas/${marca.toLowerCase()}.png`} 
                     alt={`${marca}`} 
                     />

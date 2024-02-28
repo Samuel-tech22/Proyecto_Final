@@ -136,7 +136,7 @@ export default function StorePage() {
       <div className="flex justify-center py-8">
         <Link href="/store/products">
           <img
-            className="h-60 w-80 opacity-70"
+            className="h-60 w-80"
             src={`${imagesURL}/productostodos.png`}
             alt="productos"
           />

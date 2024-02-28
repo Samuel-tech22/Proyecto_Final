@@ -26,7 +26,7 @@ const TopHeader = () => {
 
   return (
     <div className="flex flex-col items-center bg-[#696868]">
-      <div className="flex items-center p-3 px-[30px] w-full">
+      <div className="flex items-center p-2 px-[30px] w-full">
         <div className="flex-1">
           <form onSubmit={handleSubmit} className="bg-slate-200 p-2 rounded-lg flex items-center justify-around w-60 ml-20">
             <input
@@ -44,7 +44,7 @@ const TopHeader = () => {
 
         <div className="flex-1">
           <Link href="/store">
-            <img width={200} className="mx-auto" src="/logo.png" alt="logo" />
+            <img width={150} className="mx-auto" src="/logo.png" alt="logo" />
           </Link>
         </div>
 
@@ -59,7 +59,7 @@ const TopHeader = () => {
             className="relative"
             onClick={goToCheckout}
           >
-            <span className="absolute top-[-18px] right-[-11px] rounded-full bg-white h-[16px] w-[16px] flex items-center justify-center text-sm font-bold text-[#d7a9a9]">
+            <span className="absolute top-[-18px] right-[-11px] rounded-full bg-white h-[16px] w-[16px] flex items-center justify-center text-sm font-bold text-black">
               {calculateTotalCount()}
             </span>
             <FontAwesomeIcon
@@ -70,28 +70,28 @@ const TopHeader = () => {
         </div>
       </div>
 
-      <div className="w-full border-t-2 flex justify-center border-white p-3">
-        <ul className="flex gap-4 text-white text-xl">
+      <div className="w-full border-t-2 flex justify-center border-white p-2">
+        <ul className="flex gap-4 text-white text-lg">
           <Link href={"/store"}>
-            <li className="text-xl hover:underline">Inicio</li>
+            <li className=" hover:underline">Inicio</li>
           </Link>
           <Link href={"/store/categories/65c963770675d5d5ad5f2082"}>
-            <li className="text-xl hover:underline">Tenis</li>
+            <li className="hover:underline">Tenis</li>
           </Link>
           <Link href={"/store/categories/65d1cf4a6c6ca2453aa3b56f"}>
-            <li className="text-xl hover:underline">Sandalias</li>
+            <li className="hover:underline">Sandalias</li>
           </Link>
           <Link href={"/store/categories/65d1cf6e6c6ca2453aa3b571"}>
-            <li className="text-xl hover:underline">Botas</li>
+            <li className="hover:underline">Botas</li>
           </Link>
           <Link href={"/store/categories/65d1cf776c6ca2453aa3b573"}>
-            <li className="text-xl hover:underline">Infantil</li>
+            <li className="hover:underline">Infantil</li>
           </Link>
           <Link href={"/store/contacto"}>
-            <li className="text-xl hover:underline">Contacto</li>
+            <li className=" hover:underline">Contacto</li>
           </Link>
           <Link href={"/store/devoluciones"}>
-            <li className="text-xl hover:underline">
+            <li className=" hover:underline">
               Cambios y devoluciones
             </li>
           </Link>

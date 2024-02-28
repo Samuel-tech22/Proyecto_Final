@@ -42,9 +42,9 @@ const AllFilteredProducts = ({ title }) => {
   };
 
   return filteredProducts.length > 0 ?(
-    <div className="flex flex-col">
+    <div className="flex flex-col w-full min-h-80">
       <Filter handleFilter={handleFilter} />
-      <span className="p-3 text-5xl py-5 font-bold tracking-wider">{title}</span>
+      <p className="p-3 text-5xl py-5 font-bold tracking-wider">{title}</p>
       <div className="w-full  justify-start">
         {filteredProducts.map((product, index) => {
           return <ProductCard key={index} product={product} />;
@@ -53,11 +53,11 @@ const AllFilteredProducts = ({ title }) => {
     </div>
   )
   : (
-    <div className="flex w-full h-full justify-center items-center">
+    <div className="flex w-full h-full justify-center items-center ">
 
       <AlertNone
       title={"Lo siento!"}
-      descripcion={"No hay productos disponibles en este momento"}
+      descripcion={"No hay productos disponibles en este momento para esa búsqueda"}
       />
       </div>
     

@@ -1,7 +1,9 @@
 import { imagesURL } from "@/config";
 import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 
 export default function ProductCard({ product }) {
+  const [isHovered, setIsHovered] = useState(false);
   function format(num) {
     return (
       "Gs. " +
@@ -16,18 +18,32 @@ export default function ProductCard({ product }) {
     router.push(`/store/products/${id}`);
   };
 
+  
   return (
     <div
-      className="w-52 mx-2 inline-block cursor-pointer border-2 border-grey"
+      className="w-52 mx-2 inline-block cursor-pointer border-2 border-grey mb-2"
       onClick={() => {
         loadProduct(product._id);
       }}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
     >
       <div className="block h-[200px] overflow-hidden">
+        {
+          isHovered ?
         <img
           src={`${imagesURL}/products/${product._id}/principal.jpg`}
-          alt={`Imagen de ${product.title}`}
+          alt={`Image of ${product.title}`}
         />
+        :
+
+        <img
+        className="hover:scale-125 transition-all duration-300 ease-in-out transform"
+          src={`${imagesURL}/products/${product._id}/1.jpg`}
+          alt={`Image of ${product.title}`}
+        />
+        }
+
       </div>
       <hr />
       <div className="p-3">
