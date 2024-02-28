@@ -53,12 +53,14 @@ const AllFilteredProducts = ({ title }) => {
     </div>
   )
   : (
-    <div>
+    <div className="flex w-full h-full justify-center items-center">
+
       <AlertNone
       title={"Lo siento!"}
       descripcion={"No hay productos disponibles en este momento"}
       />
-    </div>
+      </div>
+    
   );
 };
 
