@@ -32,7 +32,7 @@ export default function StorePage() {
           <span className="tracking-[0.2em]">Gran variedad de estilos</span>
         </p>
       </div>
-      <div className="pb-8">
+      <div className="pb-8 h-96 flex items-center justify-center mt-2">
         <ImageSlider />
       </div>
       <div className=" flex justify-center">
