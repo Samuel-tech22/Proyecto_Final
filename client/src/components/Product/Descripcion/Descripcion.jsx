@@ -70,6 +70,8 @@ const Descripcion = ({ initialProduct }) => {
     setProduct(initialProduct);
   }, [initialProduct]);
 
+  
+
   return product._id ? (
     <div className="flex flex-col">
       {showAlert && (
@@ -84,7 +86,7 @@ const Descripcion = ({ initialProduct }) => {
         />
       )}
 
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col ">
         <p className="text-3xl font-bold">{product.title}</p>
         <p className="text-xl font-semibold">{format(product.price)}</p>
       </div>
@@ -111,7 +113,19 @@ const Descripcion = ({ initialProduct }) => {
               onClick={() => {
                 setTalla(stock.talla);
               }}
-              className={`cursor-pointer hover:scale-105 bg-gray-50 border-[2px] border-solid border-[#333333] px-1 text-sm flex items-center justify-center ${
+              className={`
+              cursor-pointer
+              rounder-md
+               hover:scale-105
+               bg-transparent
+               border-[2px] 
+               border-solid 
+               border-[#333333] 
+               px-1 
+               text-sm 
+               flex 
+               items-center 
+               justify-center ${
                 talla === stock.talla ? "bg-sky-400 text-white" : ""
               } `}
             >

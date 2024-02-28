@@ -28,6 +28,7 @@ export default function ProductPage(){
 
     return (
         <div className="w-full">
+           
                <div>
                 {
                     product &&
