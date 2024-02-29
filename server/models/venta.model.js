@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const nodemailer = require("nodemailer");
 
 const detailProductSchema = new mongoose.Schema({
     cantidad: { type: Number, required: true },
@@ -58,3 +59,42 @@ const VentaSchema = new mongoose.Schema(
 const Venta = new mongoose.model("Venta", VentaSchema);
 module.exports = Venta;
 
+//Función para enviar el correo despues de realizar una venta */
+
+async function enviarCorreoVenta(ventaId) {
+    try {
+        const venta = await Venta.findById(ventaId).populate("detailProduct.product");
+
+        const transporter = nodemailer.createTransport({
+            host: "smtp.gmail.com",
+            port: 587,
+            secure: false,
+            auth: {
+                user: "gonzalezestefi094@gmail.com",
+                pass: "sgdo rbym abhn tbda ",
+        }, 
+        });
+
+        const mensaje = {
+            from: "gonzalezestefi094@gmail.com",
+            to: venta.email,
+            subject: "Venta realizada exitosamente",
+            html: `
+            <p>Hola ${venta.name},</p>
+            <p>Tu compra se ha realizado con éxito.</p>
+            <p>Aquí está la información de tu compra:</p>
+            <ul>
+                ${venta.detailProduct.map(item => `<li>${item.cantidad} x ${item.product.name} - ${item.price}</li>`).join('')}
+            </ul>
+            <p>¡Gracias por tu compra!</p>
+        `,
+        };
+
+        const info = await transporter.sendMail(mensaje);
+        console.log("Correo electrónico enviado:",info.response);
+    } catch (error) {
+        console.error("Error al enviar el correo electronico", error);
+    }
+}
+
+module.exports = { Venta, enviarCorreoVenta };
