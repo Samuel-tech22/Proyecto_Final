@@ -87,6 +87,7 @@ const Descripcion = ({ initialProduct }) => {
       )}
 
       <div className="flex flex-col ">
+      <p className="text-xl font-bold">{product.marca.toUpperCase()}</p>
         <p className="text-3xl font-bold">{product.title}</p>
         <p className="text-xl font-semibold">{format(product.price)}</p>
       </div>
@@ -126,7 +127,7 @@ const Descripcion = ({ initialProduct }) => {
                flex 
                items-center 
                justify-center ${
-                talla === stock.talla ? "bg-sky-400 text-white" : ""
+                talla === stock.talla ? "bg-sky-400 text-black" : ""
               } `}
             >
               {stock.talla}
