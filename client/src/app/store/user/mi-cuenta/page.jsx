@@ -44,11 +44,6 @@ const MiCuenta = () => {
 
   return user ? (
     <div className="px-28 py-7 h-full">
-      <div>
-        <Link href="/store">Inicio-</Link>
-        <Link href="/store/user/mi-cuenta">Mi cuenta</Link>
-      </div>
-
       <p className=" text-5xl py-5 font-bold tracking-wider"> Mi cuenta </p>
       <div className="flex gap-4 mb-2">
         <Link className="underline" href="/store/user/editUser">

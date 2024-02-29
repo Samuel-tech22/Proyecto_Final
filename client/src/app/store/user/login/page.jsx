@@ -57,11 +57,6 @@ const Login = () => {
   return (
     <div className="h-700px py-5 ps-20 bg-[#f9f4fa]">
       <div>
-        <div>
-          <Link href="/store">Inicio-</Link>
-          <Link href="/store/user/mi-cuenta">Mi cuenta-</Link>
-          <Link href="/store/user/register">Registrarse</Link>
-        </div>
         <div className="pt-3">
           <form onSubmit={(event) => onSubmit(event)}>
             <h1 className="text-5xl font-bold">Iniciar Sesión</h1>

@@ -70,8 +70,6 @@ const Descripcion = ({ initialProduct }) => {
     setProduct(initialProduct);
   }, [initialProduct]);
 
-  
-
   return product._id ? (
     <div className="flex flex-col">
       {showAlert && (
@@ -114,20 +112,8 @@ const Descripcion = ({ initialProduct }) => {
               onClick={() => {
                 setTalla(stock.talla);
               }}
-              className={`
-              cursor-pointer
-              rounder-md
-               hover:scale-105
-               bg-transparent
-               border-[2px] 
-               border-solid 
-               border-[#333333] 
-               px-1 
-               text-sm 
-               flex 
-               items-center 
-               justify-center ${
-                talla === stock.talla ? "bg-sky-400 text-black" : ""
+              className={`cursor-pointer hover:scale-105 bg-gray-50 border-[2px] border-solid border-[#333333] px-1 text-sm flex items-center justify-center ${
+                talla === stock.talla ? "bg-gray-500 text-white" : ""
               } `}
             >
               {stock.talla}
@@ -138,7 +124,7 @@ const Descripcion = ({ initialProduct }) => {
       <div className="mt-4 flex w-[50%]">
         <div className="flex">
           <button
-            className="bg-gray-100 px-2"
+            className="bg-gray-200 px-2"
             onClick={(e) => {
               if (cantidad > 0) setCantidad(cantidad - 1);
             }}
@@ -161,7 +147,7 @@ const Descripcion = ({ initialProduct }) => {
             className="bg-gray-100 px-2 w-[70px] text-center"
           />
           <button
-            className="bg-gray-100 px-2"
+            className="bg-gray-200 px-2"
             onClick={(e) => {
               setCantidad(cantidad + 1);
             }}

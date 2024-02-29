@@ -23,14 +23,17 @@ const AllFilteredProducts = ({ title }) => {
 
   useEffect(() => {
     getAllProducts();
-  }, []); 
+  }, []);
 
   const handleFilter = (marca, talla, minPrice, maxPrice) => {
     const filtrados = products
       .filter((item, index, arr) => {
         return (
           (item.marca === marca || marca === "") &&
-          (item.stocks.some((stock) => stock.talla === parseInt(talla) && stock.stock > 0) || talla === "") &&
+          (item.stocks.some(
+            (stock) => stock.talla === parseInt(talla) && stock.stock > 0
+          ) ||
+            talla === "") &&
           (item.price >= minPrice || minPrice === "") &&
           (item.price <= maxPrice || maxPrice === "")
         );
@@ -41,7 +44,7 @@ const AllFilteredProducts = ({ title }) => {
     setFilteredProducts(filtrados);
   };
 
-  return filteredProducts.length > 0 ?(
+  return filteredProducts.length > 0 ? (
     <div className="flex flex-col w-full min-h-80">
       <Filter handleFilter={handleFilter} />
       <p className="p-3 text-5xl py-5 font-bold tracking-wider">{title}</p>
@@ -51,16 +54,15 @@ const AllFilteredProducts = ({ title }) => {
         })}
       </div>
     </div>
-  )
-  : (
+  ) : (
     <div className="flex w-full h-full justify-center items-center ">
-
       <AlertNone
-      title={"Lo siento!"}
-      descripcion={"No hay productos disponibles en este momento para esa búsqueda"}
+        title={"Lo siento!"}
+        descripcion={
+          "No hay productos disponibles en este momento para esa búsqueda"
+        }
       />
-      </div>
-    
+    </div>
   );
 };
 

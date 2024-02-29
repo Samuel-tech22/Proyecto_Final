@@ -48,7 +48,7 @@ const Filter = ({ handleFilter }) => {
     <div className="flex gap-4 px-2 items-center  h-12">
       <button onClick={()=> setShowFilter(!showFilter)} className={` border-[1px] underline h-9 px-2 rounded-sm flex items-center gap-2 ${showFilter ? ' border-[#e4e4e7] shadow-sm' : 'border-transparent'} `}>
         <FaFilter className="text-gray-600" />
-        <span>Filtros</span>
+        <span>Filtrar</span>
       </button>
       {showFilter && (
 

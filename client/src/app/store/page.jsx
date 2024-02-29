@@ -1,5 +1,3 @@
-
-
 "use client";
 import ImageSlider from "@/components/ImageSlider/ImageSlider";
 import PanelLanzamientos from "@/components/PanelLanzamientos/PanelLanzamientos";

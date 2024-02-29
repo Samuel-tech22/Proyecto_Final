@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import FormUser from "@/components/FormUser/FormUser";
 import { apiUrl } from "@/config";
 import { useUser } from "@/contexts/UserContext";
@@ -28,9 +28,9 @@ const editUser = () => {
       console.log(result);
 
       const accessToken = user.accessToken;
-        let updateUser = result;
-        updateUser.accessToken = accessToken;
-        login(updateUser);
+      let updateUser = result;
+      updateUser.accessToken = accessToken;
+      login(updateUser);
       router.push(`/store/user/mi-cuenta`);
     } catch (error) {
       console.log(error);
@@ -49,22 +49,32 @@ const editUser = () => {
       setTelefono(e.target.value);
     }
   };
- 
+
   useEffect(() => {
-    if(user){
-        setNombre(user.nombreCompleto);
-        setEmail(user.email);
-        setTelefono(user.telefono);
+    if (user) {
+      setNombre(user.nombreCompleto);
+      setEmail(user.email);
+      setTelefono(user.telefono);
     }
   }, []);
 
   return (
-
-    <div className="p-8">
-      <FormUser 
-      onSubmitHandler={onSubmitHandler} isRegister={false}  nombre={nombre} email={email} telefono={telefono} password={""} confirmPassword={""} passwordConfirmed={false} loginErrors={loginErrors} inputChange={inputChange}
-      
-      />
+    <div className="ml-20">
+      <div className="p-8">
+        <h1 className="text-5xl font-bold">Editar Perfil</h1>
+        <FormUser
+          onSubmitHandler={onSubmitHandler}
+          isRegister={false}
+          nombre={nombre}
+          email={email}
+          telefono={telefono}
+          password={""}
+          confirmPassword={""}
+          passwordConfirmed={false}
+          loginErrors={loginErrors}
+          inputChange={inputChange}
+        />
+      </div>
     </div>
   );
 };

@@ -62,30 +62,31 @@ export default function categoriesPage() {
   }, []);
 
   return category?._id ? (
-    filteredProducts.length > 0 ? 
-    <div className="px-28 py-7">
-      <Filter handleFilter={handleFilter} />
-      <p className="p-3 text-4xl py-5 font-bold tracking-wider">
-        {category.name}{" "}
-      </p>
-      <div className="w-full  justify-start min-h-80">
-        {filteredProducts.map((product, index) => {
-          return <ProductCard key={index} product={product} />;
-        })}
+    filteredProducts.length > 0 ? (
+      <div className="px-28 py-7">
+        <Filter handleFilter={handleFilter} />
+        <p className="p-3 text-4xl py-5 font-bold tracking-wider">
+          {category.name}{" "}
+        </p>
+        <div className="w-full  justify-start min-h-80">
+          {filteredProducts.map((product, index) => {
+            return <ProductCard key={index} product={product} />;
+          })}
+        </div>
       </div>
-    </div>
-    : (
+    ) : (
       <div className="flex w-full h-full justify-center items-center min-h-80 ">
         <AlertNone
           title={"Lo siento!"}
-          descripcion={"No hay productos disponibles en este momento para esa búsqueda"}
+          descripcion={
+            "No hay productos disponibles en este momento para esa búsqueda"
+          }
         />
       </div>
     )
-  ) 
-  : (
+  ) : (
     <div>
       <FontAwesomeIcon className="animate-spin" width={32} icon={faRefresh} />
-    </div> 
+    </div>
   );
 }

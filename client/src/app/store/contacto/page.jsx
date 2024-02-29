@@ -111,7 +111,7 @@ const contacto = () => {
                 </div>
                 <div className="flex flex-col">
                   <button
-                    className="bg-zinc-900 text-white h-10 text-xl"
+                    className="border-2 border-gray-500 h-9 p-2 mt-2 w-30 font-bold text-black flex items-center justify-center px-8"
                     type="submit"
                   >
                     Enviar

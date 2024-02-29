@@ -205,7 +205,7 @@ const CheckoutPage = () => {
               <div className="flex flex-col">
                 <button
                   type="submit"
-                  className="p-2 w-full bg-[#666666] font-bold text-white flex items-center justify-between px-8"
+                  className="border-2 border-gray-400 h-9 p-2 mt-2 w-30 font-bold text-black flex items-center justify-between px-8"
                 >
                   Confirmar pedido
                   <FontAwesomeIcon icon={faChevronRight} />
@@ -231,7 +231,7 @@ const CheckoutPage = () => {
                     </p>
                     <div className="flex gap-2">
                       <button
-                        className=" border-2 border-gray-400 w-6 h-6 rounded-md"
+                        className="border-2 border-gray-400 w-6 h-6 rounded-md"
                         onClick={(e) => {
                           removeFromCart(item._id, item.talla);
                         }}
