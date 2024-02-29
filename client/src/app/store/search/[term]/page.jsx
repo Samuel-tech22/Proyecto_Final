@@ -4,6 +4,7 @@ import { useParams, useRouter } from "next/navigation";
 import axios from "axios";
 import { apiUrl } from "@/config";
 import ProductCard from "@/components/ProductCard/ProductCard";
+import AlertNone from "@/components/Controles/Alerts/none";
 
 export default function SearchProductPage() {
     const router = useRouter();
@@ -26,8 +27,8 @@ export default function SearchProductPage() {
         }
     }, [keyword]);
 
-    return (
-        <div className="w-full">
+    return searchResults.length > 0 ? (
+        <div className="w-full min-h-80">
         <div>
             {searchResults.map((product) => (
             <ProductCard key={product._id} product={product} />
@@ -35,5 +36,16 @@ export default function SearchProductPage() {
             
         </div>
         </div>
-    );
+    )
+    :
+    (
+        <div className="flex w-full h-full justify-center items-center ">
+    
+          <AlertNone
+          title={"Lo siento!"}
+          descripcion={"No hay productos disponibles en este momento para esa búsqueda"}
+          />
+          </div>
+        
+      );
 }
