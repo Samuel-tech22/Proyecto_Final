@@ -29,7 +29,7 @@ export default function ProductPage(){
     return (
         <div className="w-full">
            
-               <div>
+               <div className=" flex justify-center">
                 {
                     product &&
                     <Product product={product}/>

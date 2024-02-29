@@ -70,6 +70,8 @@ const Descripcion = ({ initialProduct }) => {
     setProduct(initialProduct);
   }, [initialProduct]);
 
+  
+
   return product._id ? (
     <div className="flex flex-col">
       {showAlert && (
@@ -85,24 +87,24 @@ const Descripcion = ({ initialProduct }) => {
       )}
 
       <div className="flex flex-col ">
-      <p className="text-xl font-bold">{product.marca.toUpperCase()}</p>
-        <p className="text-3xl font-bold">{product.title}</p>
-        <p className="text-xl font-semibold">{format(product.price)}</p>
+        <p className="text-3xl font-bold">{product.title[0].toUpperCase()}</p>
+        <p className="text-xl font-bold pt-2">{format(product.price)}</p>
       </div>
-      <div className="flex gap-1">
+        <div className="pt-4">
+     
+        <span className="text-lg ">Colores:</span> 
         {product?.colors?.map((color, index) => {
           return (
             <span
-              key={index}
-              className="bg-gray-50 border-[2px] border-solid border-gray-600 px-1 text-sm flex items-center justify-center"
-            >
+            key={index}
+            className="rounded-lg border px-2 py-1 text-sm bg-background text-foreground tracking-wider"            >
               {color.toUpperCase()}
             </span>
           );
         })}
-      </div>
-      <div className="mt-2">
-        <b>Talla:</b> {talla || "Seleccionar talla..."}
+      
+        <p >Marca:{product.marca.toUpperCase()}</p>
+        <p>Talla: {talla || "Seleccionar talla..."}</p>
       </div>
       <div className="flex gap-2 mt-2">
         {product?.stocks?.map((stock, index) =>
@@ -112,8 +114,20 @@ const Descripcion = ({ initialProduct }) => {
               onClick={() => {
                 setTalla(stock.talla);
               }}
-              className={`cursor-pointer hover:scale-105 bg-gray-50 border-[2px] border-solid border-[#333333] px-1 text-sm flex items-center justify-center ${
-                talla === stock.talla ? "bg-gray-500 text-white" : ""
+              className={`
+              cursor-pointer
+               hover:scale-105
+               rounded-lg 
+               border px-2
+                py-1
+                 text-sm 
+                 bg-background 
+                 text-foreground 
+                 tracking-wider
+               flex 
+               items-center 
+               justify-center ${
+                talla === stock.talla ? "bg-[#4a4ae7] text-white" : ""
               } `}
             >
               {stock.talla}
@@ -121,10 +135,10 @@ const Descripcion = ({ initialProduct }) => {
           ) : null
         )}
       </div>
-      <div className="mt-4 flex w-[50%]">
-        <div className="flex">
+      <div className="mt-4 flex h-12">
+        <div className="flex rounded-s-lg border">
           <button
-            className="bg-gray-200 px-2"
+            className="bg-transparent  px-2"
             onClick={(e) => {
               if (cantidad > 0) setCantidad(cantidad - 1);
             }}
@@ -144,10 +158,10 @@ const Descripcion = ({ initialProduct }) => {
                 console.error("La cantidad ingresada no es válida");
               }
             }}
-            className="bg-gray-100 px-2 w-[70px] text-center"
+            className="bg-transparent px-2 w-[70px] text-center"
           />
           <button
-            className="bg-gray-200 px-2"
+            className="bg-transparent px-2"
             onClick={(e) => {
               setCantidad(cantidad + 1);
             }}
@@ -157,28 +171,28 @@ const Descripcion = ({ initialProduct }) => {
         </div>
 
         <button
-          className="bg-[#333333] text-white py-2 px-4"
+          className="bg-black text-white py-2 px-4 rounded-e-lg flex items-center  border transition-all duration-300 ease-in-out"
           onClick={() => add()}
         >
           <FontAwesomeIcon className="mr-2" icon={faCartPlus} />
           Agregar al carrito
         </button>
       </div>
-      <div className="mt-2">
+      <div className="mt-2 text-lg">
         {product.stocks.reduce((total, stock) => total + stock.stock, 0)} en
         Stock
       </div>
       <div className="mt-4">
-        <p className="font-bold text-xl mb-2">Descripción</p>
+        <p className="font-bold text-lg mb-2">Descripción</p>
         {product.description}
       </div>
       <div>
-        <div className="flex flex-col text-lg pt-3">
-          <span className="text-[#003366] font-bold ">HORMA GRANDE</span>
+        <div className="flex flex-col text-lg pt-3 w-[70%] ">
+          <span className="text-red-500 rounded-t-lg border text-center border-red-500">HORMA GRANDE</span>
         </div>
-        <div className="py-4">
-          <span className="text-lg  font-bold pb-4">
-            CONSULTE TABLA DE MEDIDAS
+        <div className="py-4 rounded-b-lg border p-2 justify-center w-[70%] text-center border-red-500">
+          <span className="text-lg underline  pb-4">
+            TABLA DE MEDIDAS
           </span>
           <div>
             <span>34___</span>

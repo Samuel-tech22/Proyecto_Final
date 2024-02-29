@@ -2,22 +2,23 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUser, faCartShopping } from "@fortawesome/free-solid-svg-icons";
-import { FaSearch } from 'react-icons/fa';
+import { faUser, faCartShopping, faSearchMinus, faSearch } from "@fortawesome/free-solid-svg-icons";
+import { FaSearch, FaSearchMinus } from "react-icons/fa";
 import { useCart } from "@/contexts/CartContext";
 
 const TopHeader = () => {
   const { calculateTotalCount } = useCart();
   const router = useRouter();
   const [searchTerm, setSearchTerm] = useState("");
+  const [showSearch, setShowSearch] = useState(false);
 
   const handleSubmit = (e) => {
+    setShowSearch(false);
     e.preventDefault();
     if (searchTerm.trim() !== "") {
       router.push(`/store/search/${encodeURIComponent(searchTerm)}`);
     }
   };
-  
 
   const goToCheckout = () => {
     router.push("/store/checkout");
@@ -26,20 +27,7 @@ const TopHeader = () => {
   return (
     <div className="flex flex-col items-center bg-[#696868]">
       <div className="flex items-center p-2 px-[30px] w-full">
-        <div className="flex-1">
-          <form onSubmit={handleSubmit} className="bg-slate-200 p-2 rounded-lg flex items-center justify-around w-60 ml-20">
-            <input
-              type='text'
-              placeholder='Buscar...'
-              className='bg-transparent focus:outline-none w-24 sm:w-30'
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-            />
-            <button type="submit">
-              <FaSearch className='text-slate-600' />
-            </button>
-          </form>
-        </div>
+        <div className="flex-1"></div>
 
         <div className="flex-1">
           <Link href="/store">
@@ -47,17 +35,35 @@ const TopHeader = () => {
           </Link>
         </div>
 
-        <div className="flex-1 flex gap-4 justify-end mr-20">
+        <div className="flex-1 flex gap-4 items-center justify-end mr-20">
+          <form
+            onSubmit={handleSubmit}
+            className={`bg-[rgba(0,0,0,0.5)] ${showSearch ? 'flex' : 'hidden'}  absolute top-0 left-0 w-full h-full z-50   items-center justify-around`}
+          >
+            <div className="flex w-96 bg-slate-300 rounded-md">
+            <input
+              type="text"
+              placeholder="Buscar..."
+                className=" focus:outline-none w-96 rounded-s-md p-2"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+            />
+            <button type="submit" className="px-2 w-9 bg-slate-300">
+              <FaSearch className="text-slate-600" />
+            </button>
+
+            </div>
+          </form>
+            <button type="button" className="text-white" onClick={() => {setShowSearch(!showSearch)}}>
+              <FontAwesomeIcon icon={!showSearch ? faSearch : faSearchMinus} className={`text-white ${showSearch ? ' ': '' }`} />
+            </button>
           <Link href="/store/user/login">
             <FontAwesomeIcon
               className="text-white"
               icon={faUser}
             ></FontAwesomeIcon>
           </Link>
-          <button
-            className="relative"
-            onClick={goToCheckout}
-          >
+          <button className="relative" onClick={goToCheckout}>
             <span className="absolute top-[-18px] right-[-11px] rounded-full bg-white h-[16px] w-[16px] flex items-center justify-center text-sm font-bold text-black">
               {calculateTotalCount()}
             </span>
@@ -90,9 +96,7 @@ const TopHeader = () => {
             <li className=" hover:underline">Contacto</li>
           </Link>
           <Link href={"/store/devoluciones"}>
-            <li className=" hover:underline">
-              Cambios y devoluciones
-            </li>
+            <li className=" hover:underline">Cambios y devoluciones</li>
           </Link>
         </ul>
       </div>
@@ -101,4 +105,3 @@ const TopHeader = () => {
 };
 
 export default TopHeader;
-
