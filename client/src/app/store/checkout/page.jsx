@@ -102,8 +102,7 @@ const CheckoutPage = () => {
 
   return cart.length > 0 ? (
     <div className="w-full p-4">
-      <h1 className="text-2xl font-bold text-center py-8">Confirmar pedido</h1>
-
+      <h1 className="text-5xl p-3 text-4xl py-5 font-bold tracking-wider text-center py-8">Confirmar pedidos</h1>
       <div className="flex justify-evenly">
         <form onSubmit={confirmarPedido} className="">
           <p>

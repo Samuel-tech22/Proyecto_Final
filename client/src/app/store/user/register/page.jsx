@@ -102,11 +102,6 @@ const RegisterUser = () => {
     <div>
       <div className="py-5 ps-20 bg-[#f9f4fa]">
         <div>
-          <div>
-            <Link href="/store">INICIO</Link>
-            <Link href="/store/user/mi-cuenta">Mi cuenta</Link>
-            <Link href="/store/user/register">Registrarse</Link>
-          </div>
           <div className="pt-3">
             <h1 className="text-5xl font-bold">Crear mi cuenta</h1>
             <FormUser
