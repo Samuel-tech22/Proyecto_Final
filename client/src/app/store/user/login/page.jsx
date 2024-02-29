@@ -55,7 +55,7 @@ const Login = () => {
   
 
   return (
-    <div className="h-700px py-5 ps-20 bg-[#f9f4fa]">
+    <div className="h-700px py-5 ps-20 bg-white">
       <div>
         <div className="pt-3">
           <form onSubmit={(event) => onSubmit(event)}>
