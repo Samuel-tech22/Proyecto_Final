@@ -114,20 +114,8 @@ const Descripcion = ({ initialProduct }) => {
               onClick={() => {
                 setTalla(stock.talla);
               }}
-              className={`
-              cursor-pointer
-               hover:scale-105
-               rounded-lg 
-               border px-2
-                py-1
-                 text-sm 
-                 bg-background 
-                 text-foreground 
-                 tracking-wider
-               flex 
-               items-center 
-               justify-center ${
-                talla === stock.talla ? "bg-[#4a4ae7] text-white" : ""
+              className={`cursor-pointer hover:scale-105 bg-gray-50 border-[2px] border-solid border-[#333333] px-1 text-sm flex items-center justify-center ${
+                talla === stock.talla ? "bg-gray-500 text-white" : ""
               } `}
             >
               {stock.talla}
