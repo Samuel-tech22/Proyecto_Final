@@ -12,7 +12,7 @@ module.exports.findAllProducts = async (req, res) => {
 //Función que busca los lanzamientos 
 module.exports.findLanzamientos = async (req, res) => {
     try {
-        const products = await Product.find().sort({createdAt: 1}).limit(10);
+        const products = await Product.find().sort({createdAt: -1}).limit(10);
         res.status(200).json(products);
     } catch (error) {
         res.status(500).json(error);
